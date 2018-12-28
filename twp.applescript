@@ -4,5 +4,6 @@ on run {input, parameters}
 end run
 
 on replaceSpace(x)
-	do shell script "echo " & quoted form of x & "| sed 's/ /%20/g'"
+	set cmd to "'require \"cgi\"; puts CGI.escape(STDIN.read.chomp)'"
+	do shell script "echo " & quoted form of x & "| ruby -e " & cmd & "| sed 's/+/%20/g'"
 end replaceSpace
